@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>헤더메뉴 + 탭메뉴</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        li {
+            list-style: none;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        body {
+            line-height: 1;
+            color: #333;
+        }
+
+        /******** 🌷header ********/
+        header {
+            width: 100%;
+            height: 70px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #ffffffad;
+            backdrop-filter: blur(10px);
+        }
+        header .inner {
+            width: calc(100% - 40px);
+            height: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            /* 아직 변화없음 => .inner 높이 설정 해야함 */
+            position: relative;
+        }
+        header .inner nav {
+            position: absolute;
+            right: 0;
+            top: 70px;
+            background-color: cornsilk;
+            display: none;
+        }
+        header .inner nav li {
+            padding: 20px;
+        }
+        header .inner img {
+            height: 40px;
+        }
+
+        /******** 🌷.main_visual ********/
+        .main_visual {
+            height: 100vh;
+        }
+        .main_visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* .cont01 */
+        .cont01 {
+            width: calc(100% - 40px);
+            margin: 100px auto;
+        }
+        .cont01 .tab_menu {
+            margin-bottom: 30px;
+        }
+        .cont01 .tab_menu li {
+            display: inline-block;
+            padding: 10px;
+            /* 가로로 나열 */
+        }
+        .cont01 .tab_menu li:first-child {
+            border-bottom: 1px solid #333;
+        }
+        .cont01 .tab_cont {
+            height: 350px;
+        }
+        .cont01 .tab_cont img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="inner">
+            <h1>
+                <a href="#">
+                    <img src="img/icon_flower.png" alt="꽃 로고" />
+                </a>
+            </h1>
+            <!-- 메뉴보기 -->
+            <div class="menu_icon">
+                <img src="img/icon_menu_bk.png" alt="메뉴보기" />
+            </div><!-- .menu_icon end -->
+            <nav>
+                <ul>
+                    <li><a href="#">새로나온책</a></li>
+                    <li><a href="#">베스트셀러</a></li>
+                    <li><a href="#">어린이도서</a></li>
+                    <li><a href="#">수험정보센터</a></li>
+                    <li><a href="#">영광문화</a></li>
+                </ul>
+            </nav>
+            <!-- 메뉴닫기 -->
+        </div><!-- .inner end -->
+    </header>
+
+    <section class="main_visual">
+        <img src="img/vintage04.jpg" alt="" />
+    </section><!-- .main_visual end -->
+
+    <section class="cont01">
+        <ul class="tab_menu">
+            <li>베스트셀러</li>
+            <li>기획테마</li>
+            <li>분야별시간</li>
+        </ul><!-- .tab_menu end -->
+        <div class="tab_cont">
+            <img src="img/vintage01.jpg" alt="" />
+        </div><!-- .tab_cont end -->
+    </section><!-- .cont01 end -->
+
+    <script>
+        //메뉴 아이콘 클릭
+        let menuIcon = document.getElementsByClassName('menu_icon')[0];
+        let menu = document.getElementsByTagName('nav')[0];
+        
+        menu.style.display = 'none';
+        menuIcon.onclick = function(){
+            if(menu.style.display  == 'none'){
+                menu.style.display = 'block'
+            } else {
+                menu.style.display = 'none'
+            }
+        }
+
+        //메뉴클릭(탭메뉴), 이미지 나타나기
+        let cont01 = document.getElementsByClassName('cont01')[0];
+        let cont01Img = cont01.getElementsByTagName('img')[0];
+        let cont01Menu = cont01.getElementsByTagName('li');
+
+        let i = 0; //초기값
+
+        cont01Menu[0].style.borderBottom = '1px solid #333';
+        for(i; i<cont01Menu.length; i++) {
+            //console.log(i)
+
+            let num = i + 1;
+            let imgChange = 'img/vintage' + 0 + num + '.jpg';
+
+            cont01Menu[i].onclick = function(){
+                cont01Img.src = imgChange;
+
+                cont01Menu[0].style.borderBottom = '1px solid #fff'
+                cont01Menu[1].style.borderBottom = '1px solid #fff'
+                cont01Menu[2].style.borderBottom = '1px solid #fff'
+                this.style.borderBottom = '1px solid #333'
+                //위에서부터 읽어나가기 떄문에 스타일값을 먼저 작성 후, 마지막 this~
+                
+            }//contMenu.onclick end
+        }//for
+        
+    </script>
+</body>
+</html>
